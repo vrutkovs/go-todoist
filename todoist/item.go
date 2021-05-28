@@ -17,6 +17,7 @@ type Item struct {
 	Due            Due     `json:"due,omitempty"`
 	Priority       int     `json:"priority,omitempty"`
 	ParentID       ID      `json:"parent_id,omitempty"`
+	SectionID      ID      `json:"section_id,omitempty"`
 	ChildOrder     int     `json:"child_order,omitempty"`
 	DayOrder       int     `json:"day_order,omitempty"`
 	Collapsed      IntBool `json:"collapsed,omitempty"`
