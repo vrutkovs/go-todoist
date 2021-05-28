@@ -2,8 +2,9 @@ package todoist
 
 import (
 	"fmt"
-	"github.com/satori/go.uuid"
 	"strconv"
+
+	uuid "github.com/satori/go.uuid"
 )
 
 type ID string
