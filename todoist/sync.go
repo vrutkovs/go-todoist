@@ -6,6 +6,7 @@ type SyncState struct {
 	// User User `json:"user"`
 	Projects     []Project `json:"projects"`
 	ProjectNotes []Note    `json:"project_notes"`
+	Sections     []Section `json:"sections"`
 	Items        []Item    `json:"items"`
 	Notes        []Note    `json:"notes"`
 	Labels       []Label   `json:"labels"`
