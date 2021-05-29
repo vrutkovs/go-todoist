@@ -36,6 +36,7 @@ type NewItemOpts struct {
 	Due             Due
 	Priority        int
 	ParentID        ID
+	SectionID       ID
 	ChildOrder      int
 	DayOrder        int
 	Collapsed       IntBool
@@ -55,6 +56,7 @@ func NewItem(content string, opts *NewItemOpts) (*Item, error) {
 		Content:        content,
 		Due:            opts.Due,
 		ParentID:       opts.ParentID,
+		SectionID:      opts.SectionID,
 		ChildOrder:     opts.ChildOrder,
 		DayOrder:       opts.DayOrder,
 		Collapsed:      opts.Collapsed,
