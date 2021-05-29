@@ -22,9 +22,9 @@ func (i IntBool) MarshalJSON() ([]byte, error) {
 
 func (i *IntBool) UnmarshalJSON(b []byte) (err error) {
 	switch string(b) {
-	case "1":
+	case "1", "true":
 		*i = true
-	case "0":
+	case "0", "false":
 		*i = false
 	default:
 		return fmt.Errorf("Could not unmarshal into intbool: %s", string(b))
