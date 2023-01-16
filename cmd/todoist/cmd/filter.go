@@ -5,11 +5,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"os"
+	"strings"
+
 	"github.com/kobtea/go-todoist/cmd/util"
 	"github.com/kobtea/go-todoist/todoist"
 	"github.com/spf13/cobra"
-	"os"
-	"strings"
 )
 
 // filterCmd represents the filter command
@@ -133,7 +134,7 @@ var filterUpdateCmd = &cobra.Command{
 			return err
 		} else {
 			if cmd.Flags().Changed("color") {
-				filter.Color = color
+				filter.Color = fmt.Sprint(color)
 			}
 		}
 		if order, err := cmd.Flags().GetInt("order"); err != nil {
