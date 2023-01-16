@@ -92,7 +92,6 @@ func NewClient(endpoint, token, sync_token, cache_dir string, logger *log.Logger
 func (c *Client) newRequest(ctx context.Context, method, spath string, values url.Values) (*http.Request, error) {
 	u := *c.URL
 	u.Path = path.Join(c.URL.Path, spath)
-	values.Add("token", c.Token)
 
 	s := ""
 	if method == http.MethodPost {
@@ -112,6 +111,8 @@ func (c *Client) newRequest(ctx context.Context, method, spath string, values ur
 	if method == http.MethodPost {
 		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	}
+
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.Token))
 
 	req = req.WithContext(ctx)
 	return req, nil
