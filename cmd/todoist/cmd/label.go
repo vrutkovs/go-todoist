@@ -5,11 +5,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"os"
+	"strings"
+
 	"github.com/kobtea/go-todoist/cmd/util"
 	"github.com/kobtea/go-todoist/todoist"
 	"github.com/spf13/cobra"
-	"os"
-	"strings"
 )
 
 // labelCmd represents the label command
@@ -115,7 +116,7 @@ var labelUpdateCmd = &cobra.Command{
 			return err
 		} else {
 			if cmd.Flags().Changed("color") {
-				label.Color = color
+				label.Color = fmt.Sprint(color)
 			}
 		}
 		if order, err := cmd.Flags().GetInt("order"); err != nil {

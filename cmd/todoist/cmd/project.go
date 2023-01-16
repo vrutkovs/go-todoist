@@ -5,11 +5,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"os"
+	"strings"
+
 	"github.com/kobtea/go-todoist/cmd/util"
 	"github.com/kobtea/go-todoist/todoist"
 	"github.com/spf13/cobra"
-	"os"
-	"strings"
 )
 
 // projectCmd represents the project command
@@ -130,7 +131,7 @@ var projectUpdateCmd = &cobra.Command{
 			return err
 		} else {
 			if cmd.Flags().Changed("color") {
-				project.Color = color
+				project.Color = fmt.Sprint(color)
 			}
 		}
 		if collapsed, err := cmd.Flags().GetBool("collapsed"); err != nil {

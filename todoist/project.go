@@ -3,16 +3,18 @@ package todoist
 import (
 	"context"
 	"errors"
-	"github.com/fatih/color"
+	"fmt"
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/fatih/color"
 )
 
 type Project struct {
 	Entity
 	Name         string  `json:"name"`
-	Color        int     `json:"color"`
+	Color        string  `json:"color"`
 	ChildOrder   int     `json:"child_order"`
 	ParentID     ID      `json:"parent_id"`
 	Collapsed    IntBool `json:"collapsed"`
@@ -42,9 +44,9 @@ func NewProject(name string, opts *NewProjectOpts) (*Project, error) {
 	}
 	project.ID = GenerateTempID()
 	if opts.Color == 0 {
-		project.Color = 47
+		project.Color = "47"
 	} else {
-		project.Color = opts.Color
+		project.Color = fmt.Sprint(opts.Color)
 	}
 	return &project, nil
 }
@@ -56,19 +58,19 @@ func (p Project) String() string {
 func (p Project) ColorString() string {
 	var attr color.Attribute
 	switch p.Color {
-	case 30, 31:
+	case "30", "31":
 		attr = color.FgHiRed
-	case 32, 33:
+	case "32", "33":
 		attr = color.FgHiYellow
-	case 34, 35, 36:
+	case "34", "35", "36":
 		attr = color.FgHiGreen
-	case 37, 38, 39:
+	case "37", "38", "39":
 		attr = color.FgHiCyan
-	case 40, 41, 42:
+	case "40", "41", "42":
 		attr = color.FgHiBlue
-	case 43, 44, 45, 46:
+	case "43", "44", "45", "46":
 		attr = color.FgHiMagenta
-	case 47, 48, 49:
+	case "47", "48", "49":
 		attr = color.FgHiBlack
 	default:
 		attr = color.FgWhite

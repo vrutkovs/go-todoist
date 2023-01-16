@@ -3,16 +3,18 @@ package todoist
 import (
 	"context"
 	"errors"
-	"github.com/fatih/color"
+	"fmt"
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/fatih/color"
 )
 
 type Label struct {
 	Entity
 	Name       string  `json:"name"`
-	Color      int     `json:"color"`
+	Color      string  `json:"color"`
 	ItemOrder  int     `json:"item_order"`
 	IsFavorite IntBool `json:"is_favorite"`
 }
@@ -24,19 +26,19 @@ func (l Label) String() string {
 func (l Label) ColorString() string {
 	var attr color.Attribute
 	switch l.Color {
-	case 30, 31:
+	case "30", "31":
 		attr = color.FgHiRed
-	case 32, 33:
+	case "32", "33":
 		attr = color.FgHiYellow
-	case 34, 35, 36:
+	case "34", "35", "36":
 		attr = color.FgHiGreen
-	case 37, 38, 39:
+	case "37", "38", "39":
 		attr = color.FgHiCyan
-	case 40, 41, 42:
+	case "40", "41", "42":
 		attr = color.FgHiBlue
-	case 43, 44, 45, 46:
+	case "43", "44", "45", "46":
 		attr = color.FgHiMagenta
-	case 47, 48, 49:
+	case "47", "48", "49":
 		attr = color.FgHiBlack
 	default:
 		attr = color.FgWhite
@@ -61,9 +63,9 @@ func NewLabel(name string, opts *NewLabelOpts) (*Label, error) {
 	}
 	label.ID = GenerateTempID()
 	if opts.Color == 0 {
-		label.Color = 47
+		label.Color = "47"
 	} else {
-		label.Color = opts.Color
+		label.Color = fmt.Sprint(opts.Color)
 	}
 	return &label, nil
 }
