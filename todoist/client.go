@@ -35,7 +35,7 @@ type Client struct {
 
 func NewClient(endpoint, token, sync_token, cache_dir string, logger *log.Logger) (*Client, error) {
 	if len(endpoint) == 0 {
-		endpoint = "https://api.todoist.com/sync/v8"
+		endpoint = "https://api.todoist.com/sync/v9"
 	}
 	parsed_endpoint, err := url.ParseRequestURI(endpoint)
 	if err != nil {
