@@ -26,7 +26,7 @@ type Item struct {
 	ResponsibleUID ID      `json:"responsible_uid,omitempty"`
 	Checked        IntBool `json:"checked,omitempty"`
 	InHistory      IntBool `json:"in_history,omitempty"`
-	SyncID         int     `json:"sync_id,omitempty"`
+	SyncID         string  `json:"sync_id,omitempty"`
 	DateAdded      Time    `json:"date_added,omitempty"`
 	CompletedDate  Time    `json:"completed_date"`
 }
