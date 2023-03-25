@@ -55,7 +55,7 @@ var labelAddCmd = &cobra.Command{
 			opts.ItemOrder = order
 		}
 		if favorite, err := cmd.Flags().GetBool("favorite"); err != nil {
-			opts.IsFavorite = todoist.IntBool(favorite)
+			opts.IsFavorite = favorite
 		}
 		label, err := todoist.NewLabel(name, &opts)
 		if label == nil {
@@ -97,10 +97,11 @@ var labelUpdateCmd = &cobra.Command{
 		if len(args) == 0 {
 			return errors.New("require label id to update")
 		}
-		id, err := todoist.NewID(args[0])
+		_id, err := todoist.NewID(args[0])
 		if err != nil {
 			return fmt.Errorf("invalid id: %s", args[0])
 		}
+		id := _id.String()
 		label := client.Label.Resolve(id)
 		if label == nil {
 			return fmt.Errorf("no such label id: %s", id)
@@ -169,7 +170,7 @@ var labelDeleteCmd = &cobra.Command{
 				return errors.New("require label id to delete")
 			}
 			return util.ProcessID(args[0], func(id todoist.ID) error {
-				label := client.Label.Resolve(id)
+				label := client.Label.Resolve(id.String())
 				if label == nil {
 					return fmt.Errorf("invalid label id: %s", id)
 				}

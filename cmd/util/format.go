@@ -121,7 +121,7 @@ func LabelTableString(labels []todoist.Label) string {
 	var rows [][]todoist.ColorStringer
 	for _, l := range labels {
 		rows = append(rows, []todoist.ColorStringer{
-			todoist.NewNoColorString(l.ID.String()),
+			todoist.NewNoColorString(l.ID),
 			l,
 		})
 	}
