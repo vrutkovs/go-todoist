@@ -7,11 +7,11 @@ type RelationClient struct {
 type ItemRelations struct {
 	//Users map[ID]User
 	Projects map[ID]Project
-	Labels   map[ID]Label
+	Labels   map[string]Label
 }
 
 func (c RelationClient) Items(items []Item) ItemRelations {
-	res := ItemRelations{Projects: map[ID]Project{}, Labels: map[ID]Label{}}
+	res := ItemRelations{Projects: map[ID]Project{}, Labels: map[string]Label{}}
 	for _, item := range items {
 		if _, ok := res.Projects[item.ProjectID]; !ok {
 			p := c.Project.Resolve(item.ProjectID)

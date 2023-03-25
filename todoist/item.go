@@ -11,24 +11,24 @@ import (
 
 type Item struct {
 	Entity
-	UserID         ID      `json:"user_id,omitempty"`
-	ProjectID      ID      `json:"project_id,omitempty"`
-	Content        string  `json:"content"`
-	Due            Due     `json:"due,omitempty"`
-	Priority       int     `json:"priority,omitempty"`
-	ParentID       ID      `json:"parent_id,omitempty"`
-	SectionID      ID      `json:"section_id,omitempty"`
-	ChildOrder     int     `json:"child_order,omitempty"`
-	DayOrder       int     `json:"day_order,omitempty"`
-	Collapsed      IntBool `json:"collapsed,omitempty"`
-	Labels         []ID    `json:"labels,omitempty"`
-	AssignedByUID  ID      `json:"assigned_by_uid,omitempty"`
-	ResponsibleUID ID      `json:"responsible_uid,omitempty"`
-	Checked        IntBool `json:"checked,omitempty"`
-	InHistory      IntBool `json:"in_history,omitempty"`
-	SyncID         string  `json:"sync_id,omitempty"`
-	DateAdded      Time    `json:"date_added,omitempty"`
-	CompletedDate  Time    `json:"completed_date"`
+	UserID         ID       `json:"user_id,omitempty"`
+	ProjectID      ID       `json:"project_id,omitempty"`
+	Content        string   `json:"content"`
+	Due            Due      `json:"due,omitempty"`
+	Priority       int      `json:"priority,omitempty"`
+	ParentID       ID       `json:"parent_id,omitempty"`
+	SectionID      ID       `json:"section_id,omitempty"`
+	ChildOrder     int      `json:"child_order,omitempty"`
+	DayOrder       int      `json:"day_order,omitempty"`
+	Collapsed      IntBool  `json:"collapsed,omitempty"`
+	Labels         []string `json:"labels,omitempty"`
+	AssignedByUID  ID       `json:"assigned_by_uid,omitempty"`
+	ResponsibleUID ID       `json:"responsible_uid,omitempty"`
+	Checked        IntBool  `json:"checked,omitempty"`
+	InHistory      IntBool  `json:"in_history,omitempty"`
+	SyncID         string   `json:"sync_id,omitempty"`
+	DateAdded      Time     `json:"date_added,omitempty"`
+	CompletedDate  Time     `json:"completed_date"`
 }
 
 type NewItemOpts struct {
@@ -40,7 +40,7 @@ type NewItemOpts struct {
 	ChildOrder      int
 	DayOrder        int
 	Collapsed       IntBool
-	Labels          []ID
+	Labels          []string
 	AssignedByUID   ID
 	ResponsibleUID  ID
 	AutoReminder    bool

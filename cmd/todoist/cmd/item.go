@@ -67,7 +67,7 @@ var itemAddCmd = &cobra.Command{
 						opts.Labels = append(opts.Labels, label.ID)
 					}
 				} else {
-					opts.Labels = append(opts.Labels, lid)
+					opts.Labels = append(opts.Labels, lid.String())
 				}
 			}
 		}
@@ -147,7 +147,7 @@ var itemUpdateCmd = &cobra.Command{
 						item.Labels = append(item.Labels, label.ID)
 					}
 				} else {
-					item.Labels = append(item.Labels, lid)
+					item.Labels = append(item.Labels, lid.String())
 				}
 			}
 		}

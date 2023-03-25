@@ -12,11 +12,16 @@ import (
 )
 
 type Label struct {
-	Entity
+	ID string `json:"id"`
 	Name       string  `json:"name"`
 	Color      string  `json:"color"`
 	ItemOrder  int     `json:"item_order"`
-	IsFavorite IntBool `json:"is_favorite"`
+	IsFavorite bool `json:"is_favorite"`
+	IsDeleted bool `json:"is_deleted"`
+}
+
+func (l Label) Equal(entity Label) bool {
+	return l.ID == entity.ID
 }
 
 func (l Label) String() string {
@@ -49,7 +54,7 @@ func (l Label) ColorString() string {
 type NewLabelOpts struct {
 	Color      int
 	ItemOrder  int
-	IsFavorite IntBool
+	IsFavorite bool
 }
 
 func NewLabel(name string, opts *NewLabelOpts) (*Label, error) {
@@ -57,11 +62,11 @@ func NewLabel(name string, opts *NewLabelOpts) (*Label, error) {
 		return nil, errors.New("new label requires a name")
 	}
 	label := Label{
+		ID:         name,
 		Name:       name,
 		ItemOrder:  opts.ItemOrder,
 		IsFavorite: opts.IsFavorite,
 	}
-	label.ID = GenerateTempID()
 	if opts.Color == 0 {
 		label.Color = "47"
 	} else {
@@ -99,7 +104,6 @@ func (c *LabelClient) Add(label Label) (*Label, error) {
 		Type:   "label_add",
 		Args:   label,
 		UUID:   GenerateUUID(),
-		TempID: label.ID,
 	}
 	c.queue = append(c.queue, command)
 	return &label, nil
@@ -128,14 +132,14 @@ func (c *LabelClient) Delete(id ID) error {
 }
 
 func (c *LabelClient) UpdateOrders(labels []Label) error {
-	args := map[ID]int{}
+	args := map[string]int{}
 	for _, label := range labels {
 		args[label.ID] = label.ItemOrder
 	}
 	command := Command{
 		Type: "label_update_orders",
 		UUID: GenerateUUID(),
-		Args: map[string]map[ID]int{
+		Args: map[string]map[string]int{
 			"id_order_mapping": args,
 		},
 	}
@@ -169,7 +173,7 @@ func (c *LabelClient) GetAll() []Label {
 	return c.cache.getAll()
 }
 
-func (c *LabelClient) Resolve(id ID) *Label {
+func (c *LabelClient) Resolve(id string) *Label {
 	return c.cache.resolve(id)
 }
 
@@ -207,7 +211,7 @@ func (c *labelCache) getAll() []Label {
 	return *c.cache
 }
 
-func (c *labelCache) resolve(id ID) *Label {
+func (c *labelCache) resolve(id string) *Label {
 	for _, label := range *c.cache {
 		if label.ID == id {
 			return &label
@@ -229,7 +233,7 @@ func (c *labelCache) store(label Label) {
 			res = append(res, l)
 		}
 	}
-	if isNew && !label.IsDeleted.Bool() {
+	if isNew && !label.IsDeleted {
 		res = append(res, label)
 	}
 	c.cache = &res
