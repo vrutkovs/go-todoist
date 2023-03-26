@@ -8,7 +8,7 @@ require (
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.17 // indirect
 	github.com/mattn/go-runewidth v0.0.14
-	github.com/satori/go.uuid v1.2.1-0.20180103174451-36e9d2ebbde5
+	github.com/satori/go.uuid v1.2.1-0.20181028125025-b2ce2384e17b
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/viper v1.14.0
 )
