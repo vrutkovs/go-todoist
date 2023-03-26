@@ -253,7 +253,7 @@ var itemMoveCmd = &cobra.Command{
 			}
 		}
 		if projectID, err := cmd.Flags().GetString("project"); err == nil {
-			if id, err  := todoist.NewID(projectID); err != nil {
+			if id, err := todoist.NewID(projectID); err != nil {
 				return fmt.Errorf("invalid project id: %s", projectID)
 			} else {
 				opts.ProjectID = id

@@ -12,12 +12,12 @@ import (
 )
 
 type Label struct {
-	ID string `json:"id"`
-	Name       string  `json:"name"`
-	Color      string  `json:"color"`
-	ItemOrder  int     `json:"item_order"`
-	IsFavorite bool `json:"is_favorite"`
-	IsDeleted bool `json:"is_deleted"`
+	ID         string `json:"id"`
+	Name       string `json:"name"`
+	Color      string `json:"color"`
+	ItemOrder  int    `json:"item_order"`
+	IsFavorite bool   `json:"is_favorite"`
+	IsDeleted  bool   `json:"is_deleted"`
 }
 
 func (l Label) Equal(entity Label) bool {
@@ -101,9 +101,9 @@ type LabelClient struct {
 func (c *LabelClient) Add(label Label) (*Label, error) {
 	c.cache.store(label)
 	command := Command{
-		Type:   "label_add",
-		Args:   label,
-		UUID:   GenerateUUID(),
+		Type: "label_add",
+		Args: label,
+		UUID: GenerateUUID(),
 	}
 	c.queue = append(c.queue, command)
 	return &label, nil
